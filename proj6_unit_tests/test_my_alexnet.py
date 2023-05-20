@@ -1,0 +1,22 @@
+from proj6_code.my_alexnet import MyAlexNet
+from proj6_unit_tests.test_models import *
+
+import numpy as np
+import torch
+from PIL import Image
+
+
+def test_my_alexnet():
+  '''
+  Tests the transforms using output from disk
+  '''
+  this_alex_net = MyAlexNet()
+
+  all_layers, output_dim, counter, num_params_grad, num_params_nograd = extract_model_layers(this_alex_net)
+
+  assert output_dim == 15
+#   print("pass 1", num_params_grad)
+  assert num_params_grad < 70000
+#   print("pass 2", num_params_nograd)
+  assert num_params_nograd > 4e7
+#   print("pass 3")
